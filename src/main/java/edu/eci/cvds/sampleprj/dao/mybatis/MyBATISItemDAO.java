@@ -35,4 +35,11 @@ public class MyBATISItemDAO implements ItemDAO{
         }
     }
 
+	@Override
+	public void updateTarifa(int i, long tarifa) throws PersistenceException {
+		// TODO Auto-generated method stub
+		Item it = load(i);
+		itemMapper.actualizarTarifa(it.getId(), tarifa);
+	}
+
 }

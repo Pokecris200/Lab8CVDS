@@ -218,17 +218,10 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        itemsDisponibles.put(4, i4);
        itemsDisponibles.put(5, i5);
        itemsDisponibles.put(6, i6);
-
-       ItemRentado ir1=new ItemRentado(0,i1,null, java.sql.Date.valueOf("2017-01-01"), java.sql.Date.valueOf("2017-03-12"));
-       ItemRentado ir2=new ItemRentado(0,i2, java.sql.Date.valueOf("2017-01-04"), java.sql.Date.valueOf("2017-04-7"));
-       ItemRentado ir3=new ItemRentado(0,i1, java.sql.Date.valueOf("2017-01-07"), java.sql.Date.valueOf("2017-07-12"));
-
+       
        ArrayList<ItemRentado> list1 = new ArrayList<>();
-       list1.add(ir1);
        ArrayList<ItemRentado> list2 = new ArrayList<>();
-       list2.add(ir2);
        ArrayList<ItemRentado> list3 = new ArrayList<>();
-       list3.add(ir3);
 
        Cliente c1=new Cliente("Oscar Alba", 1026585664, "6788952", "KRA 109#34-C30", "oscar@hotmail.com", false,list1);
        Cliente c2=new Cliente("Carlos Ramirez", 1026585663, "6584562", "KRA 59#27-a22", "carlos@hotmail.com", false,list2);
@@ -236,6 +229,14 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        clientes.put(c1.getDocumento(), c1);
        clientes.put(c2.getDocumento(), c2);
        clientes.put(c3.getDocumento(), c3);
+       
+       ItemRentado ir1=new ItemRentado(0,i1, c1, java.sql.Date.valueOf("2017-01-01"), java.sql.Date.valueOf("2017-03-12"));
+       ItemRentado ir2=new ItemRentado(0,i2, c2, java.sql.Date.valueOf("2017-01-04"), java.sql.Date.valueOf("2017-04-7"));
+       ItemRentado ir3=new ItemRentado(0,i1, c3, java.sql.Date.valueOf("2017-01-07"), java.sql.Date.valueOf("2017-07-12"));
+
+       list1.add(ir1);
+       list2.add(ir2);
+       list3.add(ir3);
 
    }
 }
