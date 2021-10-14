@@ -1,16 +1,21 @@
 package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
 import java.util.List;
+import java.sql.Date;
+
+import org.apache.ibatis.annotations.Param;
 
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
 
 public interface ItemRentadoMapper {
 	
-	public ItemRentado consultarItemRentado(int id);
+	public ItemRentado consultarItemRentado(@Param ("idIR") int id);
 	
-	public List<ItemRentado> loadItemClientes(long idcliente);
+	public List<ItemRentado> loadItemClientes(@Param ("idCli") long idcliente);
 	
-	public long valueMultx(Item it);
+	public int valueMultx(@Param ("item") Item it);
+	
+	public int consultarMultaxRetraso(@Param ("item") Item it, @Param ("dev") Date devolucion);
 
 }

@@ -34,8 +34,8 @@ public interface ClienteMapper {
      */
     public List<Cliente> consultarClientes();
     
-    public void añadirCliente(Cliente c);
+    public void añadirCliente(@Param ("cli") Cliente c);
     
-    public void actualizarVeto(long idcli, boolean state);
+    public void actualizarVeto(@Param ("doc") long idcli, @Param ("st") boolean state);
     
 }

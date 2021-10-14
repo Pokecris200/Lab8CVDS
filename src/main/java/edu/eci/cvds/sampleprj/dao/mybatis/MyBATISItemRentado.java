@@ -50,15 +50,13 @@ public class MyBATISItemRentado implements ItemRentadoDAO{
 		// TODO Auto-generated method stub
 		
 		ItemRentado itemR = load(itemId);
-		int diasRetraso = LocalDate.now().getDayOfMonth() - itemR.getFechafinrenta().toLocalDate().getDayOfMonth();
-		return (int) it.consultarItem(itemR.getItem().getId()).getTarifaxDia() * diasRetraso;
+		return ir.valueMultx(it.consultarItem(itemR.getItem().getId()));
 	}
 
 	@Override
 	public long consultarMultaRetraso(int iditem, Date fechaDevolucion) {
 		// TODO Auto-generated method stub
 		ItemRentado itemR = load(iditem);
-		int diasRetrasados = fechaDevolucion.toLocalDate().getDayOfMonth() - itemR.getFechafinrenta().toLocalDate().getDayOfMonth();
-		return it.consultarItem(itemR.getItem().getId()).getTarifaxDia() * diasRetrasados;
+		return ir.consultarMultaxRetraso(it.consultarItem(itemR.getItem().getId()), fechaDevolucion);
 	}
 }

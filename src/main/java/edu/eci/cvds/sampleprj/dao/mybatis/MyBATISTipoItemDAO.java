@@ -16,18 +16,6 @@ public class MyBATISTipoItemDAO implements TipoItemDAO{
     private TipoItemMapper tipoItem;
 
 	@Override
-	public void save(TipoItem ti) throws PersistenceException {
-		
-		try{
-            tipoItem.addTipoItem(ti.getDescripcion());
-        }
-        catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al registrar el item "+ti.toString(),e);
-        } 
-		
-	}
-
-	@Override
 	public TipoItem load(int id) throws PersistenceException {
 
 		try{

@@ -21,6 +21,10 @@
     *
     FROM VI_ITEMS
   </select>
+  
+  <update parameterType="map" id="actualizarTarifa">
+  	update VI_ITEMS set tarifaxdia = #{newTarifa} where id = #{id_It}
+  </update>
 
   <resultMap type='Item' id='ItemResult'>
     <id property='id' column='id'/>
@@ -30,11 +34,7 @@
     <result property='tarifaxDia' column='tarifaxdia'/>
     <result property='formatoRenta' column='formatorenta'/>
     <result property='genero' column='genero'/>
-    <association property='tipo' javaType='TipoItem' resultMap='TipoItemResult'></association>
+    <association property='tipo' javaType='TipoItem' resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult'></association>
   </resultMap>
-
-  <resultMap type='TipoItem' id='TipoItemResult'>
-    <id property='id' column='id'/>
-    <result property='descripcion' column='descripcion'/></resultMap>
   
 </mapper>

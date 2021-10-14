@@ -61,6 +61,14 @@
   <insert parameterType="map" id="agregarItemRentadoACliente">
     insert into VI_ITEMRENTADO(CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta) values (#{idc}, #{idt}, #{fini}, #{ffin})
   </insert>
+  
+  <insert parameterType="map" id="añadirCliente">
+    insert into VI_CLIENTES(documento, nombre, telefono, direccion, email, vetado) values (#{cli.documento}, #{cli.nombre}, #{cli.telefono}, #{cli.direccion}, #{cli.email}, #{cli.vetado})
+  </insert>
+  
+  <update parameterType="map" id="actualizarVeto">
+  	update VI_CLIENTES set vetado = #{st} where documento = #{doc}
+  </update>
 
   <resultMap type='Cliente' id='ClienteResult'>
     <id property='documento' column='documento'/>
@@ -68,13 +76,7 @@
     <result property='telefono' column='telefono'/>
     <result property='direccion' column='direccion'/>
     <result property='email' column='email'/>
-    <collection property='rentados' ofType='ItemRentado' resultMap='ItemRentadoResult'></collection>
+    <collection property='rentados' ofType='ItemRentado' resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult'></collection>
   </resultMap>
-
-  <resultMap type='ItemRentado' id='ItemRentadoResult'>
-    <id property='id' column='id'/>
-    <result property='fechainiciorenta' column='fechainiciorenta'/>
-    <result property='fechafinrenta' column='fechafinrenta'/>
-    <association property='item' javaType='Item' resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association>
-  </resultMap>
-</mapper>
+  
+</mapper>  
