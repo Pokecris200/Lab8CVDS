@@ -35,7 +35,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
-       throw new UnsupportedOperationException("Not supported yet.");
+       //throw new UnsupportedOperationException("Not supported yet.");
+	   return irDAO.valorMultaRetraso(itemId);
    }
 
    @Override
@@ -50,7 +51,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       //throw new UnsupportedOperationException("Not supported yet.");
+	   return irDAO.loadItemClientes(idcliente);
 	   
    }
 
@@ -76,12 +78,14 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public List<Item> consultarItemsDisponibles() {
-       throw new UnsupportedOperationException("Not supported yet.");
+       //throw new UnsupportedOperationException("Not supported yet.");
+	   return itemDAO.consultarItemsDisponibles();
    }
 
    @Override
    public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       //throw new UnsupportedOperationException("Not supported yet.");
+	   return irDAO.consultarMultaRetraso(iditem, fechaDevolucion);
    }
 
    @Override
@@ -110,7 +114,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       //throw new UnsupportedOperationException("Not supported yet.");
+	   return itemDAO.consultarCostoAlquiler(iditem, numdias);
    }
 
    @Override

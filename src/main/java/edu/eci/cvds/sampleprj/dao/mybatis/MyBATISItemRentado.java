@@ -7,8 +7,11 @@ import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.ItemRentadoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
-import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 public class MyBATISItemRentado implements ItemRentadoDAO{
 
@@ -20,25 +23,42 @@ public class MyBATISItemRentado implements ItemRentadoDAO{
 
 	
 	@Override
-	public ItemRentado load(int ir_id) {
+	public ItemRentado load(int ir_id) throws PersistenceException{
 		// TODO Auto-generated method stub
-		return null;
+		try{
+			return ir.consultarItemRentado(ir_id);
+        }
+        catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("ItemRentado no encontrado: "+ir_id,e);
+        }
+		
 	}
 	
 	@Override
-	public long valorMultaRetraso(int itemId) throws PersistenceException{
+	public List<ItemRentado> loadItemClientes(long idcliente) throws PersistenceException{
 		// TODO Auto-generated method stub
 		try{
-			
-            Item item = it.consultarItem(itemId);
-            
+			return ir.loadItemClientes(idcliente);
         }
         catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Item no encontrado: "+itemId,e);
+            throw new PersistenceException("El cliente " + idcliente + " no ha rentado ningun item.",e);
         }
-		return 0;
+	}
+	
+	@Override
+	public int valorMultaRetraso(int itemId) throws PersistenceException{
+		// TODO Auto-generated method stub
+		
+		ItemRentado itemR = load(itemId);
+		int diasRetraso = LocalDate.now().getDayOfMonth() - itemR.getFechafinrenta().toLocalDate().getDayOfMonth();
+		return (int) it.consultarItem(itemR.getItem().getId()).getTarifaxDia() * diasRetraso;
 	}
 
-	
-
+	@Override
+	public long consultarMultaRetraso(int iditem, Date fechaDevolucion) {
+		// TODO Auto-generated method stub
+		ItemRentado itemR = load(iditem);
+		int diasRetrasados = fechaDevolucion.toLocalDate().getDayOfMonth() - itemR.getFechafinrenta().toLocalDate().getDayOfMonth();
+		return it.consultarItem(itemR.getItem().getId()).getTarifaxDia() * diasRetrasados;
+	}
 }

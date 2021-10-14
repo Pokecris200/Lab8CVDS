@@ -9,6 +9,7 @@ import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.samples.entities.TipoItem;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MyBATISItemDAO implements ItemDAO{
 
@@ -42,4 +43,15 @@ public class MyBATISItemDAO implements ItemDAO{
 		itemMapper.actualizarTarifa(it.getId(), tarifa);
 	}
 
+	@Override
+	public long consultarCostoAlquiler(int iditem, int numdias) {
+		// TODO Auto-generated method stub
+		return load(iditem).getTarifaxDia() * numdias;
+	}
+
+	@Override
+	public List<Item> consultarItemsDisponibles() {
+		// TODO Auto-generated method stub
+		return itemMapper.consultarItems();
+	}
 }
