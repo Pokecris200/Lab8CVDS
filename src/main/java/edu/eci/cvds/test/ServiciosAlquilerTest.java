@@ -35,7 +35,7 @@ public class ServiciosAlquilerTest {
         for(int i = 0; i < 100; i += 10) {
             boolean r = false;
             try {
-                Cliente cliente = serviciosAlquiler.consultarCliente(documento);
+                Cliente cliente = serviciosAlquiler.consultarCliente(565489164);
             } catch(ExcepcionServiciosAlquiler e) {
                 r = true;
             } catch(IndexOutOfBoundsException e) {
