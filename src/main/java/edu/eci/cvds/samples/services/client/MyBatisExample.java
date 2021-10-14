@@ -30,12 +30,20 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.*;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.TipoItem;
+import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
+import edu.eci.cvds.samples.services.ServiciosAlquiler;
+import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
+import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
+import com.google.inject.Inject;
 
 /**
  *
  * @author hcadavid
  */
 public class MyBatisExample {
+	
+	static ServiciosAlquiler serviciosAlquiler;
+	
 
     /**
      * Método que construye una fábrica de sesiones de MyBatis a partir del
@@ -61,8 +69,9 @@ public class MyBatisExample {
      * Programa principal de ejempo de uso de MyBATIS
      * @param args
      * @throws SQLException 
+     * @throws ExcepcionServiciosAlquiler 
      */
-    public static void main(String args[]) throws SQLException {
+    public static void main(String args[]) throws SQLException{
         SqlSessionFactory sessionfact = getSqlSessionFactory();
 
         SqlSession sqlss = sessionfact.openSession();
@@ -72,14 +81,14 @@ public class MyBatisExample {
         //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
         //cm...
         
-        ClienteMapper cm = sqlss.getMapper(ClienteMapper.class);
+        //ClienteMapper cm = sqlss.getMapper(ClienteMapper.class);
         
-        ItemMapper im = sqlss.getMapper(ItemMapper.class);
+        //ItemMapper im = sqlss.getMapper(ItemMapper.class);
         
-        TipoItemMapper tim = sqlss.getMapper(TipoItemMapper.class);
+        //TipoItemMapper tim = sqlss.getMapper(TipoItemMapper.class);
         
-        ItemRentadoMapper irm = sqlss.getMapper(ItemRentadoMapper.class);
-        System.out.println(cm.consultarClientes());
+        //ItemRentadoMapper irm = sqlss.getMapper(ItemRentadoMapper.class);
+        
         //System.out.println(cm.consultarCliente(6));
         //cm.agregarItemRentadoACliente(998, 4, new Date(2021,10,3), new Date(2021,10,5));
 
@@ -88,11 +97,15 @@ public class MyBatisExample {
         //im.insertarItem(new Item(new TipoItem(70, "guerra"), 22, "Celular", "Equipo tecnologico", new Date(121, 10, 15), 1545545744, "abduzcan", "tecnologia"));
         
         sqlss.commit();
-
+        
+        //System.out.println(cm.consultarClientes());
         //System.out.println(im.consultarItem(93));
         //System.out.println(im.consultarItems());
         //System.out.println(tim.getTiposItems());
-        System.out.println(irm.consultarItemRentado(2158512));
+        //System.out.println(irm.consultarItemRentado(2158512));
+        serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
+        
+        System.out.println(serviciosAlquiler);
         
         //System.out.println(cm.consultarCliente(998));
         

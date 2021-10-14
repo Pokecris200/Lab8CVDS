@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-public class MyBATISItemRentado implements ItemRentadoDAO{
+public class MyBATISItemRentadoDAO implements ItemRentadoDAO{
 
 	@Inject
 	private ItemMapper it;
